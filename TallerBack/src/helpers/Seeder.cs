@@ -23,9 +23,9 @@ namespace TallerBack.src.helpers
 
             if (!await roleManager.RoleExistsAsync("Admin"))
             {
-                Console.WriteLine("DEATHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
                 await roleManager.CreateAsync(new IdentityRole<Guid>("Admin"));
             }
+            else{Console.WriteLine("DEATHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");}
 
             var adminUser = await userManager.FindByEmailAsync(adminEmail);
             if (adminUser == null)
@@ -44,10 +44,6 @@ namespace TallerBack.src.helpers
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(adminUser, "Admin");
-                }
-                else
-                {
-                    Console.WriteLine("PENEPENEPENE");
                 }
             }
         }
