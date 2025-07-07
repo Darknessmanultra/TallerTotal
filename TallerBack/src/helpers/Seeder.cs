@@ -17,7 +17,7 @@ namespace TallerBack.src.helpers
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
 
-            var adminName = "Ignacio Mancilla";
+            var adminName = "Ignacio_Mancilla";
             var adminEmail = "ignacio.mancilla@gmail.com";
             var adminPassword = "Pa$$word2025";
 
@@ -30,13 +30,15 @@ namespace TallerBack.src.helpers
             var adminUser = await userManager.FindByEmailAsync(adminEmail);
             if (adminUser == null)
             {
+                var faker = new Bogus.Faker("en");
+                var phone = faker.Phone.PhoneNumber("9########");
                 adminUser = new ApplicationUser
                 {
                     Id = Guid.NewGuid(),
                     UserName = adminName,
                     Email = adminEmail,
                     EmailConfirmed = true,
-                    PhoneNumber = "+56912345678",
+                    PhoneNumber = phone,
                     BirthDate = DateOnly.FromDateTime(new DateTime(1990, 1, 1))
                 };
 
@@ -44,6 +46,10 @@ namespace TallerBack.src.helpers
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(adminUser, "Admin");
+                }
+                else
+                {
+                    Console.WriteLine("❌ Admin creation failed: " + string.Join(", ", result.Errors.Select(e => e.Description)));
                 }
             }
         }

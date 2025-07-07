@@ -44,3 +44,5 @@ next-env.d.ts
 /TallerBack/bin
 /TallerBack/obj
 /TallerBack/Properties
+TallerBack/Taller.db-shm
+TallerBack/Taller.db-wal
