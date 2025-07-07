@@ -55,6 +55,7 @@ namespace TallerBack.src.helpers
         }
         public static async Task SeedUsersAsync(IServiceProvider serviceProvider, int count = 10)
         {
+            if (count == 0) return;
             using var scope = serviceProvider.CreateScope();
 
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();

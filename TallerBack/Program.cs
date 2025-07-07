@@ -69,7 +69,7 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
     await DbSeeder.SeedAsync(db);
     await IdentityDataSeeder.SeedAdminAsync(services);
-    await IdentityDataSeeder.SeedUsersAsync(services);
+    await IdentityDataSeeder.SeedUsersAsync(services,0);
 }
 
 app.UseSwagger();
